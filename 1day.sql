@@ -1,6 +1,8 @@
 use encore;
 select * from employees;
 select * from departments;
+
+#2장.
 select department_id, department_name 
 from departments
 where department_id<50;
@@ -47,6 +49,7 @@ select last_name, job_id, department_id, hire_date
 from employees
 order by hire_date desc;
 
+#4장.
 select employees.employee_id, employees.last_name, 
 	employees.department_id, departments.department_id,
     departments.location_id
@@ -57,6 +60,7 @@ select e.employee_id, e.last_name, e.department_id,
 d.department_id, d.location_id
 from employees e, departments d
 where e.department_id = d.department_id;
+
 
 select department_id, department_name,
 location_id, city
