@@ -27,7 +27,7 @@ from employees;
 select max(salary) - min(salary) as 'DIFFERENCE'
 from employees
 
-# 9. 관리자 번호 및 해당 관리자에 속한 사원의 최저 급여를 표시하십시오. 관리자를 알 수 없는 사원 및 최저 급여가 $ 6,000 미만인 그룹은 제외시키고 결과를 급여에 대한 내림차순으로 정렬하십시오.
+#9. 관리자 번호 및 해당 관리자에 속한 사원의 최저 급여를 표시하십시오. 관리자를 알 수 없는 사원 및 최저 급여가 $ 6,000 미만인 그룹은 제외시키고 결과를 급여에 대한 내림차순으로 정렬하십시오.
 select manager_id, min(salary) 
 from employees    
 WHERE manager_id IS NOT NULL      
@@ -35,19 +35,31 @@ GROUP BY manager_id
 HAVING MIN(salary) > 6000      
 ORDER BY MIN(salary) DESC;
 
-
 # 10. 각 부서에 대해 부서 이름, 위치, 사원 수, 부서 내 모든 사원의 평균 급여를 표시하는 질의를 작성하고, 열 레이블을 각각 Name, Location, Number of People 및 Salary로 지정하십시오. 평균 급여는 소수점 둘째 자리로 반올림하십시오.
-select department_name as 'Name', location as 'Location', count(department_id), avg(salary)
-from employees
+select department_name as 'Name', location_id as 'Location', count(*) as 'Number of People', 
+round(avg(salary), 1) as Salary 
+from employees join departments
+using(department_id)
 group by department_name;
 
 # 11. 총 사원 수 및 2005, 2006, 2007, 2008년에 입사한 사원 수를 표시하는 질의를 작성하고 적합한 열 머리글을 작성하십시오.
-select count(last_name) as 'TOTAL', count(last_name)
-from employees
-where hire_date in (2005, 2006, 2007, 2008)
-group by hire_date;
+select count(*) TOTAL,
+sum(if(hire_date like '2005%', 1, 0)) '2005%',
+sum(if(hire_date like '2006%', 1, 0)) '2006%',
+sum(if(hire_date like '2007%', 1, 0)) '2007%',
+sum(if(hire_date like '2008%', 1, 0)) '2008%'
+from employees;
 
 # 12. 업무를 표시한 다음 해당 업무에 대해 부서 번호별 급여 및 부서 20, 50, 80 및 90의 급여 총액을 각각 표시하는 행렬 질의를 작성하고 각 열에 적합한 머리글을 지정하십시오.
+select job_id,
+sum(case department_id when 20 then salary end) Dept20,
+sum(case department_id when 50 then salary end) Dept50,
+sum(case department_id when 80 then salary end) Dept80,
+sum(case department_id when 90 then salary end) Dept90,
+sum(salary) Total
+from employees
+group by job_id;
+
 
 ch6.
 #1. Zlotkey와 동일한 부서에 속한 모든 사원의 이름과 입사일을 표시하는 질의를 작성하십시오. Zlotkey는 제외.
@@ -58,9 +70,70 @@ on e2.department_id = (select e1.department_id
     where e1.last_name = 'Zlotkey')
 and e1.last_name <> e2.last_name;
 
+select last_name, hire_date
+from employees
+where department_id = (select department_id
+	from employees
+    where last_name = 'Ziotkey');
+    
+
 #2. 급여가 평균 급여보다 많은 모든 사원의 사원번호와 이름을 표시하는 질의를 작성하고 결과를 급여에 대해 오름차순으로 정렬하십시오.
+select employee_id, last_name, salary
+from employees
+where salary > (select avg(salary)
+	from employees)
+order by salary;
+
 #3. 이름에 u가 포함된 사원과 같은 부서에서 일하는 모든 사원의 사원 번호와 이름을 표시하는 질의를 작성하시오.
+select employee_id, last_name
+from employees
+where department_id = (select distinct department_id
+	from employees 
+	where last_name like '%u%');
+
 #4. 부서 위치 ID가 1700인 모든 사원의 이름, 부서 번호 및 업무 ID를 표시하십시오.
+select last_name, department_id, job_id
+from employees join locations
+where location_id = 1700; 
+
+select last_name, department_id, job_id
+from employees 
+where department_id in (select deprtment_id
+	from departments 
+    where location_id = 1700);
+ 
 #5. King에게 보고하는 모든 사원의 이름과 급여를 표시하십시오.
+select last_name, salary
+from employees
+where manager_id in (select employee_id   #출력하는 값이 단일행이 아니라서 = 만 쓰면 안됌
+	from employees 
+	where last_name = 'king');    
+
+select last_name, salary
+from employees
+where manager_id = any (select employee_id 
+	from employees 
+	where last_name = 'king');
+
+
 #6. Executive 부서의 모든 사원에 대한 부서 번호, 이름 및 업무 ID를 표시하십시오.
+select e.department_id, e.last_name, e.job_id
+from employees e join departments d
+where e.department_id = d.department_id
+and d.department_name = 'executive';
+
+select department_id, last_name, job_id
+from employees
+where department_id = (select department_id 
+from departments 
+where department_name = 'Executive');
+
 #7. 3번 문제의 질의를 수정하여 평균 급여보다 많은 급여를 받고 이름에 u가 포함된 사원과 같은 부서에서 근무하는 모든 사원의 사원번호, 이름 및 급여를 표시하시오.
+select employee_id, last_name, salary
+from employees
+where salary > all(select avg(salary)
+	from employees)
+and department_id in (select department_id
+	from employees 
+	where last_name like '%u%');
+    
