@@ -49,8 +49,3 @@ call p10(10);    #while
 
 call cusor_test();
 
-SET GLOBAL log_bin_trust_function_creators = 1;
-
-select employee_id, f1(last_name, first_name) as name, salary
-from employees;
-
