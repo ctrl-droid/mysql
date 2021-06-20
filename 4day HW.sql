@@ -36,6 +36,7 @@ call search_name2('aaa');
 
 #전체검색
 call get_members(); 
+call s_title('title1');
 
 #수정
 call edit_member('aaa', '1234');
