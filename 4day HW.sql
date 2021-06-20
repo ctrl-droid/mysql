@@ -22,11 +22,17 @@ call mem_join('aaa', '111', 'namea', 'aaa@email.com');
 call mem_join('ccc', '333', 'namec', 'ccc@email.com');
 call mem_join('bbb', '222', 'nameb', 'bbb@email.com');
 
-call mem_write('aaa', sysdate(), 'title1', 'content1');
+call mem_write('aaa', 'title1', 'content1');
  
 #id로 회원검색
 call get_member('ccc'); 
 call get_member('aaa'); 
+
+call search_num(1);
+call search_num2(2);
+
+call search_name('aaa');
+call search_name2('aaa');
 
 #전체검색
 call get_members(); 
