@@ -16,6 +16,8 @@ Q.저장 프로시저를 사용하여 다음 기능을 구형하시오.
 #member 관련함수 호출문
 select * from member;
 select * from board;
+select * from 
+
 
 #회원가입
 call mem_join('aaa', '111', 'namea', 'aaa@email.com');
