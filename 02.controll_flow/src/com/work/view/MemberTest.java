@@ -14,8 +14,24 @@ import com.work.model.dto.Member;
  * @see com.work.model.dto.Member
  */
 public class MemberTest {
-
 	public static void main(String[] args) {
+		Member dto1 = new Member();
+		System.out.println("객체 생성 후 회원정보 출력");
+		dto1.printMember();  // Guest, null, null, ..., 0, null
+		
+		System.out.println("객체 생성 후 회원정보 변경");
+		dto1.memberId = "encore01";
+		dto1.memberPw = "happy2021";
+		dto1.name = "박호두";
+		dto1.grade = "G";
+		dto1.setMileage(1234);
+		
+		System.out.println("회원정보 변경 후 회원정보 출력");
+		dto1.printMember(); // encore01, happy2021, 박호두, null, ... G, 1234, null 
+		
+	}
+	
+	public static void main1(String[] args) {
 		// 회원 클래스를 이용한 회원객체 생성
 		// 클래스이름 참조변수명 = new 클래스이름 ();
 		Member dto1 = new Member();
