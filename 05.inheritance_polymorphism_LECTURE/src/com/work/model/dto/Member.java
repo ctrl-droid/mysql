@@ -167,7 +167,7 @@ public class Member {
 
 	// java.lang.Object#toString()
 	@Override
-	public String toString() { // @Override 재정의 규칙을 준수하지 않아서 컴파일 오류 발생 , @Override 어노테이션을 지우면 중복정
+	public String toString() { // @Override 재정의 규칙을 준수하지 않아서 컴파일 오류 발생 , @Override 어노테이션을 지우면 중복정의
 		return memberId + ", " + memberPw + ", " + name + ", " + mobile + ", " + email + ", " + entryDate + ", "
 				+ grade;
 	}
