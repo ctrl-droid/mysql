@@ -53,8 +53,21 @@ public class Utillity {
 //		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.KOREAN);
 //		String currentDate = simpleDateFormat.format(new Date());
 //		return currentDate;
-		
 		return new SimpleDateFormat(pattern, Locale.KOREAN).format(new Date());
+	}
+	
+	// 위의 getCurrentDate + getCurrentTime
+	public static String getCurrentTimeAndCurrentTime(String pattern) {
+		return new SimpleDateFormat(pattern).format(new Date());
+	}
+	
+	public static String getCurrentTimeAndCurrentTime() {
+		return getCurrentTimeAndCurrentTime("yyyy.MM.dd", Locale.KOREAN);
+	}
+	
+	public static String getCurrentTimeAndCurrentTime(String pattern, Locale locale) {
+		return new SimpleDateFormat(pattern, locale).format(new Date());
+
 	}
 	
 	// 공통 기능 메서드 호출 테스트
@@ -65,6 +78,12 @@ public class Utillity {
 
         System.out.println("현재날짜: " + getCurrentTime());
         System.out.println("현재날짜: " + getCurrentTime("HH:mm:ss"));
+        
+        System.out.println();
+        System.out.println("현재날짜: " + getCurrentTimeAndCurrentTime()); // 기본형식 날짜 및 시간, 기본로케일 KOREA
+        System.out.println("현재날짜: " + getCurrentTimeAndCurrentTime("yyyy-MM-dd", Locale.KOREA));
+        System.out.println("현재날짜: " + getCurrentTimeAndCurrentTime("a h:mm", Locale.US)); // 기본형식 날짜 및 시간, 로케일 US
+        System.out.println("현재날짜: " + getCurrentTimeAndCurrentTime("a h:mm", Locale.JAPAN)); 
         
     }
     
