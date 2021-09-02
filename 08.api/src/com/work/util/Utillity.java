@@ -2,6 +2,7 @@ package com.work.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 공통으로 사용하는 기능 모델링
@@ -9,47 +10,79 @@ import java.util.Date;
  * @author Playdata
  *
  */
-public class Utility {
+public class Utillity {
+	
 	// 현재날짜 기본 형식 : 년도4자리-월2자리-일2자리 문자열 변환 메서드
-	// 메서드명 : getCurrentDate():String
-	
-	// 현재날짜 아규먼트 형식 : pattern
-	// 메서드명 : getCurrentDate():String
-	
-	// 현재시간 : 기본 형식 : 오후 5:00 
-	// 메서드명 : getCurrentTime():String
-	// see api: java.util.Locale
-	
-	// 현재시간 : 아규먼트 형식 : pattern
-	// 메서드명 : getCurrentTime():String
-	
+    // 메서드명 : getCurrentDate():String
+	public static String getCurrentDate() {
+		// sol1
+//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		String currentDate = simpleDateFormat.format(new Date());
+//		return currentDate;
 		
-	// 공통 기능 메서드 호출 테스트
-	public static void main(String[] args) {
-		// 메서드를 구현 후 테스트 해보세요
-		System.out.println("현재날짜: " + getCurrentDate());
-		System.out.println("현재날짜: " + getCurrentDate("yyyy.MM.dd"));
+		//sol2
+		return getCurrentDate("yyyy-MM-dd");
+		// => 밑의 getCurrentDate랑 아규먼트 받는 차이밖에 없기 떄문에 return에서 패턴을 직접 입력해도 된다. (아규먼트 안받는 애만 줄이는거 가능)
+	}
+	
+    // 현재날짜 아규먼트 형식 : pattern
+    // 메서드명 : getCurrentDate():String
+	public static String getCurrentDate(String pattern) {
+		// sol1
+//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+//		String currentDate = simpleDateFormat.format(new Date());
+//		return currentDate;
 		
-		System.out.println("현재날짜: " + getCurrentTime());
-		System.out.println("현재날짜: " + getCurrentTime("HH:mm:ss"));
-		
+		// sol2
+		return new SimpleDateFormat(pattern).format(new Date());
+	}
+	
+    // 현재시간 : 기본 형식 : 오후 5:00 
+    // 메서드명 : getCurrentTime():String
+    // see api: java.util.Locale
+	public static String getCurrentTime() {
+//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("a h:mm", Locale.KOREAN);
+//		String currentDate = simpleDateFormat.format(new Date());
+//		return currentDate;
+		return getCurrentTime("a h:mm");
 	}
 
-	public static void main1(String[] args) {
-		// 날짜: Date 클래스에서 toString() 메서드 재정의 여부 확인
-		// see api: dow mon dd hh:mm:ss zzz yyy
-		Date today = new Date();
-		System.out.println("현재날짜: " + today); // 현재날짜: Wed Sep 01 16:45:20 KST 2021
+    // 현재시간 : 아규먼트 형식 : pattern
+    // 메서드명 : getCurrentTime():String
+	public static String getCurrentTime(String pattern) {
+//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.KOREAN);
+//		String currentDate = simpleDateFormat.format(new Date());
+//		return currentDate;
 		
-		// 현재날짜 기본 형식 : 년도4자리-월2자리-일2자리 문자열 
+		return new SimpleDateFormat(pattern, Locale.KOREAN).format(new Date());
+	}
+	
+	// 공통 기능 메서드 호출 테스트
+    public static void main(String[] args) {
+    	// 메서드를 구현 후 테스트 해보세요
+        System.out.println("현재날짜: " + getCurrentDate());
+        System.out.println("현재날짜: " + getCurrentDate("yyyy.MM.dd"));
+
+        System.out.println("현재날짜: " + getCurrentTime());
+        System.out.println("현재날짜: " + getCurrentTime("HH:mm:ss"));
+        
+    }
+    
+	public static void main1(String[] args) {
+		// 날짜: Date 클래스에서 toString() 매서드 재정의 여부 확인
+		Date today = new Date();
+		System.out.println("현재날짜 : " + today); // 현재날짜: Wed Sep 16:45:20 KST 2021
+		
+		// 현재날짜 기본 형식 : 년도4자리-월2자리-일2자리 문자열
 		// java.text.SimpleDateFormat : 날짜 형식관련 클래스
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		// 메서드이름??(Date) => String
-		// see api : String	format(Date date)
+		// 메서드이름?? (Date) => String
+		// see api : String format(Date date)
 		String currentDate = simpleDateFormat.format(new Date());
-		System.out.println("현재날짜: " + currentDate);  // 현재날짜: 2021-09-01
+		System.out.println("현재날짜 : " + currentDate);
 		
-		// 현재시간: 오후 4:58 형식 
+		// 현재시간 : 오후 4:58 형식
+		String currentTime = simpleDateFormat.format(new Date());
 	}
-}
 
+}
