@@ -1,0 +1,201 @@
+## this
+-- 현재 객체를 지칭하는 참조변수
+-- this.멤버변수명
+-- this(parameters)
+
+## Constructor
+-- new 객체 생성시 자동 호출 수행
+-- 멤버변수 초기화, 객체 서비스되기전에 선행처리해야할 로직
+-- 최소 1개 이상의 생성자 존재
+-- 중복정의(overloading) 규칙: 이름 동일, 아규먼트 다름(갯수,타입,순서), 반환타입, 접근권한 상관없음
+-- 중복정의시에 기본생성자도 함께 정의 권장: 상속 편리 하게 사용 가능
+-- 개발자가 목적에 따라서 기본생성자 제공하지 않는 경우도 있음: wrapper class
+
+## Default Constructor
+-- 개발자가 명시적으로 1개의 생성자도 정의하지 않는 경우 컴파일시점에 자동으로 제공하는 생성자
+-- public 클래스이름() {}
+
+## Abstraction 
+-- 주요 특징(속성) 추출해서 클래스 설계
+
+## Encapsulation
+-- 목적: information hiding(데이터, 알고리즘)
+-- domain class 적용설계: Member(회원 도메인)
+-- 설계규칙:
+	1. private 멤버변수
+	2. public void setter(xxx타입) {// 데이터 검증 후 변경처리=> isXxx(param) 메서드를 통해서 검증 }
+	3. public xxx타입 getter() {return xxx;}
+	4. private boolean isXxx(xxx타입) { if (검증로직) {} else {}}
+
+## Inheritance
+
+## Polymorphism
+-- 중복정의(overloading)
+
+## 배열(array)
+-- 1차원
+-- 2차원
+
+## 회원관리 프로그램 Class 구성
+-- 회원 도메인 클래스 : Member
+-- 회원관리 시스템 테스트 클래스 :  MemberTest
+-- 회원관리 서비스 클래스 : MemberService
+
+
+## Inheritance
+-- 상속
+-- 클래스들이 갖는 공통기능을 일반화 설계 방법
+-- 부모클래스(super) => 자식클래스 관계(sub)
+-- sub "is a" super : 올바른 상속 관계
+-- 계층구조(tree 구조)
+-- 단일 상속 허용
+-- root class(최상위 부모클래스) 
+	>> java.lang.Object
+	>> 모든 클래스는 자동으로 상속받음
+	>> 주요 재정의 사용메서드
+		=> + toString():String
+		=> + equals(Object) : boolean
+		=> + hashCode() : int
+-- 부모클래스 선언방법
+	>> [modifiers] class 부모클래스이름 {}
+	
+-- 자식클래스 선언방법
+	>> [modifiers] class 자식클래스이름 extends 부모클래스이름 {}
+
+	>> 부모의 모든 멤버가 자동으로 상속받음
+	>> 부모의 private 멤버는 상속은 이루어지지만 접근권한으로 인해서 자식 사용 불가
+	>> 부모의 생성자는 상속이 되지 않고, 대신에 자식객체의 생성자에서 부모의 생성자를 명시적으로 지정 가능
+	
+-- 메모리 로딩 시점 : 부모 멤버 로딩(부모 생성자 수행) => 자식 멤버 로딩(자식 생성자 수행)
+
+-- super 키워드
+	>> 부모 객체를 지칭하는 참조변수 
+	>> super.부모멤버변수명
+	>> super(parameters)
+		=> 자식객체의 생성자 첫번째 수행문 위치, this() 함께 사용 불가
+		=> 자식객체의 생성자에서 부모의 생성자를 명시적으로 지정시 사용
+		=> 자식객체의 생성자에서 부모의 생성자를 명시적으로 지정하지 않으면 자동으로 부모의 기본생성자를 호출 지정: super();
+		=> 부모의 생성자에 기본생성자가 반드시 존재해야만 자식객체의 생성자에서 명시적으로 부모의 생성자 지정하지 않아도 됨
+
+
+## 회원관리시스템
+-- 은닉성, 상속 반영 변경 설계
+-- 회원 공통 속성:
+	>> 아이디, 비밀번호, 이름, 휴대폰, 이메일, 가입일, 등급
+	
+-- 일반회원 : 마일리지
+-- 우수회원 : 담당자
+-- 관리자 : 직책( - position : String )
+
+-- 의존관계 
+	>> 부모클래스 : Member
+	>> 자식클래스
+		=> 일반회원 : GeneralMember
+		=> 우수회원 : SpecialMember
+		=> 관리자 : AdminMember
+	>> 테스트클래스 : MemberTest
+	
+-- package 구조 : MVC Pattern 
+-- domain : com.work.model.dto
+	>> Member, GeneralMember, SpecialMember. AdminMember
+
+-- text : com.work.view
+	>> MemberTest
+
+
+## Polymorphism
+-- 다형성: 
+	>> 하나의 기억공간에 여러개의 데이터를 담을 수 있는 기억공간
+	>> 하나의 메서드이름으로 아규먼트를 다르게 수행
+	>> 일반화시킨 기능을 자식클래스에서 변경 가능
+	
+-- 변수 큰 타입 : 단일변수, 매개변수, 반환타입, 배열타입
+	>> 부모타입의 변수는 자식객체를 참조(저장) 가능
+	>> 하지만, 부모타입이므로 자식객체의 멤버는 접근 불가함
+	
+	>> 자식객체가 상속받은 메서드를 재정의 한 경우에는 재정의한 메서드는 부모타입이어도 실제 자식객체가 재정의한 메서드로 자동 호출 수행됨
+		=> virtual method invocation
+	
+	>> 실제 자식 객체타입으로 형변환을 통해서 실제 메모리에 로딩된 자식객체의 멤버 접근 가능
+		=> 형변환: 
+		Member dto = new GeneralMember("", "", "", ..., 5000);
+		dto.setMileage(1000); 	// error: 자식 멤버는 부모타입 참조시에 접근 불가
+		
+		GeneralMember g = (GeneralMember)dto;
+		g.setMileage(1000);		// success: 실제 자식객체로 형변환을 통해서 자식의 마일리지 멤버 접근 가능함
+		
+		SpecialMember s = (SpecialMember)dto; 
+		// 컴파일 성공, 실행시 형변환 예외 발생함(ClassCastException) => 문제
+		
+		// 형변환 하기 전에 실제 객체의 instance 여부를 검증한 후에 형변환 : 오류 방지(안정성)
+		// if(참조변수명 instancof 클래스이름) => boolean
+		if (dto instanceof GeneralMember) {
+			GeneralMember g = (GeneralMember)dto;
+			g.setMileage(1000);
+		} else if (dto instanceof SpecialMember) {
+			SpecialMember s = (SpecialMember)dto;
+			s.setManager("송중기");
+		} else if (dto instanceof AdminMember) {
+			AdminMember a = (AdminMember) dto;
+			a.setPosition("부장");
+		} else {
+			System.out.println("오류처리");
+		}
+		
+	
+-- 중복정의(overloading)
+	>> 연산자 : + (숫자 덧셈, 문자열 연결), &(조건식, 숫자 bit and), |(조건식, 숫자 bit or) 
+	>> 메서드 : System.out.println(), println("hello"), println(mileage), println(new 클래스이름());
+	>> 생성자 : 기본생성자, 아규먼트 다르게 다중 정의
+	>> 규칙: 이름 동일, 아규먼트 다름, 반환타입, 접근권한 상관없음
+
+-- 재정의(overriding)
+	>> 전제조건: 상속
+	>> 부모 클래스로 일반화시킨 메서드의 기능을 자식이 필요에 의해서 수행로직 변경
+	>> 규칙 : 
+		=> 동일: 반환타입 메서드이름(아규먼트 갯수, 순서, 타입)
+		=> 확장가능(축소불가): 접근권한
+		=> 축소가능(확대불가): 예외(Exception) 
+
+
+## Annotation 
+-- jdk1.5 추가
+-- javac, java 부가적인 정보 태그
+-- java 표준, 사용자 정의 (프레임워크 등에서 많은 어노테이션 태그 정의 사용)
+-- @Override
+	>> 재정의 규칙 체크하는 어노테이션
+	>> 메서드 선언문 앞에 위치 : javac 컴파일시점에 체킹 => 규칙 미준수 오류발생(컴파일되지않음)
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

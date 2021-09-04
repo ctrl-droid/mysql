@@ -1,0 +1,244 @@
+## ECLIPSE 프로젝트 생성 및 파일 생성 방법
+1. new project
+2. 기존 project 복사
+3. 기존 project import 
+-- (3-1) project.zip import
+-- (3-2) 압축파일 해제: project 폴더 import
+
+
+## 제공받은 project.zip 파일을 
+-- workspace_java 폴더 밑에 복사
+-- C:\00.practice\workspace_java> 03.method_LECTURE.zip
+	=> Eclipse 
+	>> Package Explorer
+	>> 우클릭
+	>> Import
+	>> General
+	>> Existing... workspace
+	>> Next
+	>> 선택:
+	>> Select root directory : project 폴더 import
+	>> Select archive file : project.zip import
+	
+	>> Browse 버튼 클릭해서 해당 플젝 선택
+	>> Finish
+
+	
+## this 키워드
+## 생성자(constructor)
+## access modifiers : public, private
+## encapsulation(은닉성)
+## 배열(array)
+
+
+## this 키워드
+-- 객체 생성시에 자동으로 제공
+-- 현재 객체를 지칭하는 참조변수
+-- 사용방법:
+1. this.멤버변수명
+	>> 멤버변수명과 지역변수명을 동일하게 사용 가능
+	>> 멤버변수명과 지역변수명을 this를 통해서 식별 가능
+2. this(parameters)
+	>> 현재 객체의 정의되어 있는 생성자 호출 수행
+	>> 중복 코드 제거
+	>> 유지보수 편리성, 객체 생성시에 공통로직 존재하는 경우에 일관성 유지, 변경시 편리
+	>> 선언위치: 생성자 첫번째 수행문으로 위치해야 함(유의사항)
+	
+3. this
+	>> 현재 객체를 반환타입으로 반환해야하는 경우 : return this;
+	>> 메서드의 아규먼트로 전달해하는 경우 : 메서드명(this);
+
+
+## JVM(Java Virtual Memory)
+-- 클래스 라이프사이클, 메모리, 실행 등을 관리하는 가상머신
+-- 5개 영역 구분
+-- 주요 영역 
+
+1. stack area
+-- 지역변수: 메서드, 생성자 내부에 선언한 변수
+-- 메서드호출 ~ 메서드종료 
+-- 메서드 단위 frame
+
+2. heap area
+-- 멤버변수(static이 붙지않은 멤버변수: 인스턴스변수 instance variable)
+-- new 객체생성시에 해당 클래스의 멤버변수, 배열
+-- new 객체생성 ~ 더이상 참조하지 않을때까지(null)
+
+3. class area / method area / static area(우리나라에서만 표현)
+-- class 로딩시에 해당 클래스의 메서드가 올라가는 영역
+-- class 로딩시에 static 멤버들(class 멤버변수, class 멤버메서드, 블럭초기화)
+-- class 로딩시(app 시작) ~ class 해제(app 종료)
+
+
+## 생성자(constructor)
+-- 호출시점: new 클래스이름() 객체 생성시에 호출수행
+-- 목적:
+	1. 멤버변수 초기화
+	2. 객체 서비스 전에 선행 처리해야하는 로직 수행 
+-- 특징:
+	>> 모든 클래스는 최소 1개 이상의 생성자 중복 정의 
+	>> 생성자이름은 반드시 해당 클래스 이름과 동일해야함
+	>> 반환타입이 존재하지않음, 즉, 표기해서는 안됨
+	>> 중복정의규칙:
+		=> 이름은 동일: 클래스이름과 동일
+		=> 아규먼트 다름: 갯수, 순서, 타입
+		
+-- 기본생성자(default constructor)
+	>> 개발자가 명시적으로 생성자를 정의하지 않는 경우에 javac(컴파일러)에 의해서 자동으로 제공하는 생성자
+	>> 형식: no argument, body empty
+		public 클래스이름(){}
+	>> 개발자가 생성자 중복정의시에 기본생성자도 함께 중복정의하는것을 권장(이유: 상속 진행설명)
+	>> 개발자가 필요에 의해서 기본 생성자를 제공하지 않는 경우도 있음(Wrapper class: java.lang.Integer 설명)
+	
+-- 형식:
+	>> [access-modifiers] 클래스이름(){}
+	>> [access-modifiers] 클래스이름(args){}
+	
+
+## class 구성요소
+1. 멤버변수
+
+2. 생성자
+	-- 기본생성자
+	-- 아규먼트가 작은 갯수 : 필수 데이터 초기화 생성자
+	-- 아규먼트가 많은 갯수 : 전체 데이터 초기화 생성자
+	
+3. 메서드
+
+
+## modifiers: 제어자
+1. access modifiers
+-- 접근 권한
+-- public(+): 
+	>> 필요시에 어떤 클래스든지 상관없이 접근 가능
+	>> 클래스, 멤버변수, 생성자, 메서드
+-- protected(#): 
+	>> sub class(상속받았다면 다른 패키지에 있는 클래스도 접근 가능)
+	>> 멤버변수, 메서드
+-- default, package, friendly(생략): 
+	>> same package(같은 패키지에 있는 클래스 접근 가능)
+	>> 클래스, 멤버변수, 생성자, 메서드, 지역변수
+-- private(-): 
+	>> same class(현재 클래스에서만 접근 가능)
+	>> 멤버변수, 생성자, 메서드
+
+
+## OOP(Object Oriented Programming : 객체지향) 특징
+1. Abstraction(추상화)
+-- 객체 주요 특징(속성) 추출해서 클래스를 설계하는 일련의 과정
+
+2. Encapsulation(은닉성)
+-- 목적: information hiding(데이터, 알고리즘)
+
+3. Inheritance(상속)
+-- 부모님께 내꺼
+-- 누군가 만들어놓은 클래스를 내가 가져다 사용
+
+4. Polymorphism(다형성)
+-- 변수의 타입: 큰타입
+-- 메서드, 생성자
+
+
+## 2. Encapsulation(은닉성)
+-- 목적: information hiding(데이터, 알고리즘)
+-- 데이터: 
+	>> 외부에서 올바르지 않은 데이터 변경 불가
+	>> 도메인 클래스(DTO, VO) : 적용 설계
+	
+-- 알고리즘: 메서드 적용, 상속받은 자식클래스에서 변경 불가(재정의 불가)
+
+-- 설계규칙
+1. private 멤버변수
+	private 타입 xxxx;
+	
+	private String memberId;
+	
+2. public getter() 메서드: 조회(반환) 메서드
+	public xxx타입 getXxx() { return xxx; }
+	
+	public String getMemberId() {
+		return memberId;
+	}
+
+3. publie setter() 메서드: 변경 메서드
+	public void setXxx(xxx타입 xxx) { this.xxx = xxxx; }
+
+	public void setMemberId(String memberId) {
+		// 아규먼트로 전달받은 데이터를 검증하는 로직이 누락: 올바르지 않은 데이터로 변경가능 문제
+		// this.memberId = memberId;
+		
+		// 변경전에 데이터가 로직에 올바른 데이터인지 검증하는 로직 수행
+		// private isValid() 메서드 호출 수행해서 검증
+	}
+	
+4. 	private isXxxx() 데이터 검증 메서드
+	>> 상속을 받아도 자식클래스에서 변경(재정의) 불가 메서드
+	>> 부모클래스에서 정의한 메서드를 그대로(로직변경불가) 사용해야함
+	
+	private boolean isXxx(xxx타입 xxx) {
+		if(검증로직) {
+			return true;
+		} else {
+			return false;
+		} 
+	}
+
+
+## 회원 도메인 속성 제약
+1. 아이디: 필수항목, 길이 30자리
+2. 비밀번호: 필수항목, 길이 20자리
+3. 마일리지: 0 ~ 100000 이내
+
+## 자바 프로그래밍 개발자 가이드
+-- 연산자 앞뒤에는 공백
+-- 시작 "{" 는 선언문 뒤에 공백한칸 띄우고 {
+
+## java.lang.String
+-- 문자열 길이 반환하는 메서드 : 
+	>> 문자열.length();
+	>> 문자열참조변수명.length();
+-- 공백제거 메서드
+	>> trim():String
+-- isEmpty(): boolean
+
+
+## 아이디 검증 메서드
+-- 필수항목, 길이 30자리
+
+-- 처리로직
+1. 아규먼트로 전달받은 아이디가 null 이 아니면
+2. 아규먼트로 전달받은 아이디의 공백을 제거한 문자열의 길이를 구해서
+3. 문자열의 길이가 1 ~ 30자리 이내인지 비교해서
+4. 범위 이내이면 true
+5. 범위를 벗어나면 false 반환
+
+// 1.
+private boolean isMemberId(String memberId) {
+	if(memberId.isEmpty() || memberId.trim().length() > 30) {
+		return false;
+	} else{
+		return true;
+	}
+}
+
+// 2.
+private boolean isMemberId(String memberId) { // "    user99    " => "user99".length() 공백을 제거한 길이 검증
+	if (memberId != null && memberId.trim().length() >= 1 && memberId.trim().length() <= 30) {
+		return true;
+	}
+	return false;
+}
+
+// 3.
+public boolean isMemberId(String memberId) {
+	if(memberId != null) { // 1.
+		memberId = memberId.trim(); // 2. 전달받은 데이터의 공백을 제거하고, 로직을 비교했죠, 
+		if(memberId.length() >= 0 && memberId.length() <= 30) { // 3.
+			return true; // 4.
+		}
+		//return false;
+	}
+	return false;
+}
+
+
