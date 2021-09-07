@@ -72,68 +72,33 @@ public class Utility {
 	}
 	
 	/**
-     * 임시 보안 문자 반환: 응용해서 다양하게 활용해보세요 : 8357
-     * @author 임경혜
-     * @author 오재욱(수정)
-     * @return 기본 4자리 숫자의 보안 문자열 반환
-     */
-    public static String getSecureCodeNumber() {
-        return getSecureCodeNumber(4);
-    }
-    
-    
-    /**
-     * 아규먼트 길이의 임시 보안 문자 반환 : 8356143
-     * @author 오재욱
-     * @param length 임시보안문자열의 길이
-     * @return length자리 숫자의 보안 문자열 반환
-     */
-    public static String getSecureCodeNumber(int length) {
-        StringBuilder secureCode = new StringBuilder();
-        Random random = new Random((long)(System.nanoTime() * Math.random()));   // 로또!
-        for (int index = 0; index < length; index++) {
-            secureCode.append(random.nextInt(10));
-        }
-
-        return secureCode.toString();  // int타입의 비밀번호를 String으로 반환해주어야 메소드가 돌아감  (StringBuilder -> toString)
-    }
-
-    // 아규먼트 길이의 임시 보안 영문자 반환 : ABZQYB
-    /*
-     * @author 오재욱
-     * 랜덤으로 받은 숫자를 (char)로 형변환 해주면 아스키코드에 해당하는 알파벳으로 변환
-     */
-    public static String getSecureCodeString(int length) {
-        StringBuilder secureCode = new StringBuilder();
-        Random random = new Random((long)(System.nanoTime() * Math.random())); 
-        for (int index = 0; index < length; index++) {
-            secureCode.append((char)(random.nextInt(26) + 65));  // 알파벳 대문자에 해당하는 아스키코드를 랜덤으로 생성
-        }
-
-        return secureCode.toString();
-    }
-    
- // 아규먼트 길이의 임시 보안 숫자 및 영문자 혼용 반환 : 38ZB72 
-    /*
-     * 1. 입력받은 길이 만큼 반복문을 돌리며 secureCode에 문자열 추가
-     * 2. 이 때, 매 시행마다 0 or 1의 값을 랜덤으로 갖는 숫자 mode를 받음
-     * 3. mode가 0이라면 secureCode에 숫자(랜덤) 추가
-     * 3-2. mode가 1이라면 secureCode에 알파벳(랜덤) 추가
-     * @author 오재욱
-     */
-    public static String getSecureCodeNumberAndString(int length) {
-        StringBuilder secureCode = new StringBuilder();
-        Random random = new Random((long)(System.nanoTime() * Math.random()));
-        for (int index = 0; index < length; index++) {
-            int mode = random.nextInt(2);  // mode를 0 또는 1로 랜덤굴리기
-            if (mode == 0) {  // 3.
-                secureCode.append(random.nextInt(10));
-            } else {  // 3-2.
-                secureCode.append((char)(random.nextInt(26) + 65)); 
-            }
-        }
-        return secureCode.toString();  
-    }
+	 * 임시 보안 문자 반환: 응용해서 다양하게 활용해보세요 : 8357
+	 * @return 기본 4자리 숫자의 보안 문자열 반환
+	 */
+	public static String getSecureCodeNumber() {
+		StringBuilder secureCode = new StringBuilder();
+		Random random = new Random((long)(System.nanoTime() * Math.random())); 
+		for (int index = 0; index < 4; index++) {
+			secureCode.append(random.nextInt(10));
+		}
+		
+		return secureCode.toString();
+	}
+	
+	// 아규먼트 길이의 임시 보안 문자 반환 : 8356143
+	public static String getSecureCodeNumber(int length) {
+		return null;
+	}
+	
+	// 아규먼트 길이의 임시 보안 영문자 반환 : ABZQYB
+	public static String getSecureCodeString(int length) {
+		return null;
+	}
+	
+	// 아규머트 길이의 임시 보안 숫자 및 영문자 혼용 반환 : 38ZB72 
+	public static String getSecureCodeNumberAndString(int length) {
+		return null;
+	}
 	
 	/**
 	 * 복불복 이름 지정하기: 우수회원 등업시에 담당자 배정시에 활용, 오늘 청소당번 지정
@@ -142,8 +107,8 @@ public class Utility {
 	 */
 	public static String getRandomManger() {
 		String[] names = {"김미주", "김민하", "김희택", "송하늘", "신다운", "박용연"};
-		Random random = new Random((long)(System.nanoTime() * Math.random()));  // 랜덤long 타입 실수 생성(로또)
-		return names[random.nextInt(names.length)];  // names[0]~names[5]까지 랜덤 반환
+		Random random = new Random((long)(System.nanoTime() * Math.random())); 
+		return names[random.nextInt(names.length)];
 	}
 	
 	/**

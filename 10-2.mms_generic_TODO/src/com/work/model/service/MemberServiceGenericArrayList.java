@@ -188,15 +188,13 @@ public class MemberServiceGenericArrayList {
 		
 		Member dto = list.get(index);  
 		
-		String tempId = dto.getMemberId();  
-		String tempPw = dto.getMemberPw();  
+//		String tempId = dto.getMemberId();  
+//		String tempPw = dto.getMemberPw();  
 		
-		if (tempId.equals(memberId)) {
-			if (tempPw.equals(memberPw)) { 
-				return dto.getGrade();
+		if (dto.getMemberId().equals(memberId) && dto.getMemberPw().equals(memberPw)) {
+			return dto.getGrade();
 			}
 			// System.out.println("[오류] "+ memberId + " 님의 비밀번호가 틀립니다");
-		}
 		// System.out.println("[오류] " + memberId + " 님의 회원 정보를 찾을 수 없음.");
 		return null;
 	}
@@ -223,21 +221,21 @@ public class MemberServiceGenericArrayList {
      * @param memberId 아이디
      * @return 성공시 담당자 이름, 실패시 null
      * @author 정현아
-     * @version 1.0
+     * @version 1.1
      */
     public String updateGrade(String memberId) {
         int index = exist(memberId);
-        Utility utility = new Utility();    //매니저 이름을 부르는 메서드가 utility안에 있음
+//        Utility utility = new Utility();  //매니저 이름을 부르는 메서드가 utility안에 있음
                                             //Utility안에서 이미 static으로 고정해놨기 때문에 182번을 주석처리하고
                                             //184를 utility->Utility
-        String manager = utility.getRandomManger();
+        String manager = Utility.getRandomManger();
         if (index != -1) {
             Member dto= list.get(index);
             GeneralMember g1 = (GeneralMember)dto;
 //            System.out.println(g1);
             if(g1.getMileage()>=100000) {
                 g1.setGrade("S");
-                dto=g1;
+//                dto=g1;
                 SpecialMember specialMember = new SpecialMember(g1.getMemberId(), g1.getMemberPw(), g1.getName(), g1.getMobile(), g1.getEmail(), g1.getEntryDate(), g1.getGrade(), manager);
                 list.set(index, specialMember);
                 return specialMember.getManager();
@@ -255,7 +253,7 @@ public class MemberServiceGenericArrayList {
      * @author 김지훈
      * @version 1.0
      */
-    public int mobileexist(String mobile) {
+    public int mobileExist(String mobile) {
         if (mobile == null) {
             return -1;
         }
@@ -270,12 +268,12 @@ public class MemberServiceGenericArrayList {
     }
     
     public String findMemberId(String name, String mobile) {
-        if(mobileexist(mobile)==-1) {
+        if(mobileExist(mobile) == -1) {
             String msg = "일치하는 정보가 없음";
             return msg; 
         }
-        Member dto = list.get(mobileexist(mobile)); // 해당인덱스의 정보를 가져ㅛ옴
-        if(dto.getName()==name) {
+        Member dto = list.get(mobileExist(mobile)); // 해당인덱스의 정보를 가져옴
+        if(dto.getName() == name) {
             return dto.getMemberId();
         }
         return null;
@@ -300,10 +298,11 @@ public class MemberServiceGenericArrayList {
      * @return 임시비밀번호 or null
      * @version 1.0
      */
+    
     public String findMemberPw(String memberId, String name, String mobile) {
-//        String tmpMemberPw = Utility.getSecureCodeNumber();
-//        String tmpMemberPw = Utility.getSecureCodeString(3); // 알파벳
-        String tmpMemberPw = Utility.getSecureCodeNumberAndString(6); // 알파벳+숫자
+//        String tmpMemberPw = Utility.getSecureCodeNumber(); // 기본 4자리 숫자 임시비번
+//        String tmpMemberPw = Utility.getSecureCodeString(3); // 6자리 숫자 임시비번
+        String tmpMemberPw = Utility.getSecureCodeNumberAndString(6); // 6자리 알파벳+숫자 임시비번
         int index = exist(memberId);
         if(index != -1) {
             Member dto = list.get(index);
