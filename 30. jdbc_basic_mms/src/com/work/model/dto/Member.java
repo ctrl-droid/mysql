@@ -43,6 +43,17 @@ public class Member {
 	 * @param mileage
 	 * @param manager
 	 */
+	
+	public Member(String memberId, String memberPw, String name, String mobile, String email) {
+		this.memberId = memberId;
+		this.memberPw = memberPw;
+		this.name = name;
+		this.mobile = mobile;
+		this.email = email;
+		
+	}
+	
+	
 	public Member(String memberId, String memberPw, String name, String mobile, String email, String entryDate,
 			String grade, int mileage, String manager) {
 		this.memberId = memberId;
