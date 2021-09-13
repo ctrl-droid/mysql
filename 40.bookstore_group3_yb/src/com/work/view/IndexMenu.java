@@ -1,5 +1,6 @@
 package com.work.view;
 
+
 import com.work.model.service.BookService;
 import com.work.model.service.MemberService;
 import com.work.model.service.QnaService;
@@ -32,7 +33,6 @@ public class IndexMenu {
 	/** 판매정보관리 Service 객체 선언 및 생성 */
 	SalesService saleService = new SalesService();
 	
-	/** */
 	
 	/**
 	 * <pre>
@@ -76,10 +76,6 @@ public class IndexMenu {
 	}
 	
 
-	/** 로그인 메뉴 */
-	private void loginMenu() {
-	}
-
 	/** 회원가입 메뉴 */
 	private void joinMemberMenu() {
 		System.out.println();
@@ -100,8 +96,30 @@ public class IndexMenu {
 		System.out.print("이메일: ");
 		String email = Utility.inputString();
 		
+		memberService.addMember(memberId, memberPw, name, mobile, email);
+	}
+	
+	/** 로그인 메뉴 */
+	private void loginMenu() {
+		CustomerMenu customer = new CustomerMenu();
 		System.out.println();
-		System.out.println("회원가입 서비스 요청...");
+		System.out.println("[ 로그인 메뉴 ]");
+		
+		System.out.print("아이디: ");
+		String memberId = Utility.inputString();
+		
+		System.out.print("비밀번호: ");
+		String memberPw = Utility.inputString();
+		
+		System.out.println();
+		String grade = memberService.login(memberId, memberPw);
+		if (grade != null) {
+			customer.buyBookMenu();
+		} else {
+			System.out.println("[로그인 실패] 회원정보를 다시 확인하시기 바랍니다.");
+			
+		}
+		
 	}
 	
 	/** 비밀번호 찾기 메뉴 */
@@ -125,156 +143,5 @@ public class IndexMenu {
 		System.out.println();
 		System.exit(0);
 	}
-	
-	
-	/**
-	 * <pre>
-	 * 도서구매 메뉴
-	 * </pre>
-	 */
-	public void buyBookMenu() {
-		System.out.println("====================================");
-		System.out.println("\t[도서구매 메뉴]");
-		System.out.println("====================================");
-		System.out.println("1. 도서검색");
-		System.out.println("2. 도서구매");
-		System.out.println("3. 도서환불");
-		System.out.println("4. 교환신청");
-		System.out.println("5. 마이페이지");
-		System.out.println("9. 로그아웃(첫 화면 이동");
-		System.out.println("0. 프로그램종료");
-		System.out.println("====================================");
-		System.out.print(">> 메뉴입력: ");
-	
-		int menuNo = Utility.inputNumber();
-		
-		switch(menuNo) {
-		case 1:
-			searchBook();
-			break;
-		case 2:
-			buyBook();
-			break;
-		case 3:
-			refundBook();
-			break;
-		case 4:
-			exchangeBook();
-			break;
-		case 5:
-			myPage();
-			break;	
-		case 9:
-			startMenu();
-			break;	
-		case 0:
-			exitMenu();
-			break;
-		default:
-			System.out.println("[오류] 지원하지 않는 서비스 메뉴번호입니다.");
-			break;
-		}
-	}
-	
-	
-	private void searchBook() {
-		
-	}
 
-
-	private void buyBook() {
-		
-	}
-
-
-	private void refundBook() {
-		
-	}
-
-
-	private void exchangeBook() {
-		
-	}
-
-
-	/**
-	 * <pre>
-	 * 마이페이지 메뉴
-	 * </pre>
-	 */
-	public void myPage() {
-		System.out.println("====================================");
-		System.out.println("\t[마이페이지]");
-		System.out.println("====================================");
-		System.out.println("1. 회원정보조회");
-		System.out.println("2. 내정보 변경");
-		System.out.println("3. 구매내역 확인");
-		System.out.println("4. 내 Q&A 확인");
-		System.out.println("5. 회원탈퇴");
-		System.out.println("8. 나가기(도서구매메뉴로 이동");
-		System.out.println("9. 로그아웃(첫 화면 이동");
-		System.out.println("0. 프로그램종료");
-		System.out.println("====================================");
-		System.out.print(">> 메뉴입력: ");
-	
-		int menuNo = Utility.inputNumber();
-		
-		switch(menuNo) {
-		case 1:
-			searchMemberInfo();
-			break;
-		case 2:
-			updateMemberInfo();
-			break;
-		case 3:
-			purchaseList();
-			break;
-		case 4:
-			myQna();
-			break;
-		case 5:
-			deleteAccount();
-			break;	
-		case 8:
-			buyBookMenu();
-			break;
-		case 9:
-			startMenu();
-			break;		
-		case 0:
-			exitMenu();
-			break;
-		default:
-			System.out.println("[오류] 지원하지 않는 서비스 메뉴번호입니다.");
-			break;
-		}
-	}
-
-
-	private void searchMemberInfo() {
-		
-	}
-
-
-	private void updateMemberInfo() {
-		
-	}
-
-
-	private void purchaseList() {
-		
-	}
-
-
-	private void myQna() {
-		
-	}
-
-
-	private void deleteAccount() {
-		
-	}
-	
-	
-	
 }
