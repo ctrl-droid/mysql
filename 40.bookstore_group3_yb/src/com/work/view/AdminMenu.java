@@ -77,19 +77,15 @@ public class AdminMenu {
 	
 	
 	private void memberList() {
-		
 	}
 
 	private void administrateBook() {
-		
 	}
 
 	private void administrateQna() {
-		
 	}
 
 	private void administrateSales() {
-		
 	}
 
 	/** 9. 로그아웃 [시작메뉴] 메뉴 */
@@ -133,7 +129,7 @@ public class AdminMenu {
 			updateBook();
 			break;
 		case 4:
-			deleteBook();
+			removeBookMenu();
 			break;
 		case 9:
 			adminMenu();
@@ -148,15 +144,62 @@ public class AdminMenu {
 	}
 
 	private void addNewBook() {
+		System.out.println("[신간도서 추가]");
+		System.out.print("도서제목: ");
+		String bookTitle = Utility.inputString();
 		
+		System.out.print("저자: ");
+		String bookWriter = Utility.inputString();
+		
+		System.out.print("출판사: ");
+		String publisher = Utility.inputString();
+
+		System.out.print("장르(A,B,C): ");
+		String genre = Utility.inputString();
+
+		System.out.print("가격: ");
+		int price = Utility.inputNumber();
+		
+		System.out.print("수량(최대999): ");
+		int amount = Utility.inputNumber();
+		
+
+		bookService.addBook(bookTitle, bookWriter, publisher, genre, price, amount);
+		adminBookMenu();
 	}
 
 	private void updateBook() {
-	
+		System.out.print("정보를 변경하고자 하는 도서번호: ");
+		int bookNo = Utility.inputNumber();
+		if (!bookService.existBook(bookNo)) {
+			System.out.println("존재하지 않는 도서입니다.");
+			adminBookMenu();
+		} else {
+			System.out.println("변경할 도서 정보를 입력하세요.");
+			System.out.print("변경할 도서명: ");
+			String bookTitle = Utility.inputString();
+			System.out.print("변경할 저자명: ");
+			String bookWriter = Utility.inputString();
+			System.out.print("변경할 출판사명: ");
+			String publisher = Utility.inputString();
+			System.out.print("변경할 장르: ");
+			String genre = Utility.inputString();
+			System.out.print("변경할 가격: ");
+			int price = Utility.inputNumber();
+			System.out.print("변경할 재고수량(최대999): ");
+			int amount = Utility.inputNumber();
+			
+			bookService.editBookInfo(bookNo, bookTitle, bookWriter, publisher, genre, price, amount);
+			adminBookMenu();
+		}
 	}
 
-	private void deleteBook() {
+	private void removeBookMenu() {
+		System.out.print("삭제하고자 하는 도서번호: ");
+		int bookNo = Utility.inputNumber();
+		bookService.removeBook(bookNo);
 		
+		adminBookMenu();
 	}
 
 

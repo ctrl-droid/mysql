@@ -4,7 +4,7 @@ public class Book {
 	/** 도서번호 */
 	private int bookNo;
 	/** 도서명 */
-	private String bookName;
+	private String bookTitle;
 	/** 저자 */
 	private String bookWriter;
 	/** 출판사 */
@@ -29,17 +29,17 @@ public class Book {
 	 * 도서 데이터 초기화 생성자
 	 * </pre>
 	 * @param bookNo
-	 * @param bookName
+	 * @param bookTitle
 	 * @param bookWriter
 	 * @param bookPublisher
 	 * @param bookGanre
 	 * @param price
 	 * @param amount
 	 */
-	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher, String genre, int price,
+	public Book(int bookNo, String bookTitle, String bookWriter, String bookPublisher, String genre, int price,
 			int amount) {
 		this.bookNo = bookNo;
-		this.bookName = bookName;
+		this.bookTitle = bookTitle;
 		this.bookWriter = bookWriter;
 		this.bookPublisher = bookPublisher;
 		this.genre = genre;
@@ -67,16 +67,16 @@ public class Book {
 	/**
 	 * @return the bookName
 	 */
-	public String getBookName() {
-		return bookName;
+	public String getBookTitme() {
+		return bookTitle;
 	}
 
 
 	/**
 	 * @param bookName the bookName to set
 	 */
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
+	public void setBookName(String bookTitle) {
+		this.bookTitle = bookTitle;
 	}
 
 
@@ -165,7 +165,7 @@ public class Book {
 		StringBuilder builder = new StringBuilder();
 		builder.append(bookNo);
 		builder.append(", ");
-		builder.append(bookName);
+		builder.append(bookTitle);
 		builder.append(", ");
 		builder.append(bookWriter);
 		builder.append(", ");

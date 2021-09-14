@@ -16,9 +16,7 @@ import com.work.util.Utility;
  * @author 박예빈
  * @version ver.1.0
  * @since jdk1.8
- * @see com.work.model.dto.Member
  * @see com.work.model.dao.MemberDao
- * @see com.work.model.service.MemberService
  * @see com.work.util.Utility
  */
 public class MemberService {

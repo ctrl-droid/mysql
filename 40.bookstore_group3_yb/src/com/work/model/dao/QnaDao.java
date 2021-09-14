@@ -124,7 +124,8 @@ public class QnaDao {
 	 * @param bookName
 	 * @return 해당book객체, 미존재시 null
 	 */
-	public Qna selectOne(String qnaWriter) {
+	public ArrayList<Qna> selectOne(String qnaWriter) {
+		ArrayList<Qna> list = new ArrayList<Qna>();
 		
 		try {
 			Class.forName(driver);
@@ -151,7 +152,7 @@ public class QnaDao {
 				dto.setQnaTime(rs.getString("qna_time"));
 				dto.setQnaQuestion(rs.getString("qna_question"));
 				dto.setQnaAnswer(rs.getString("qna_answer"));
-				return dto;
+				list.add(dto);
 			}
 			
 		} catch (SQLException e) {
@@ -166,7 +167,7 @@ public class QnaDao {
 			}
 		}
 
-		return null;
+		return list;
 	}
 	
 	
@@ -250,6 +251,5 @@ public class QnaDao {
 		
 		return 0;
 	}
-
 	
 }

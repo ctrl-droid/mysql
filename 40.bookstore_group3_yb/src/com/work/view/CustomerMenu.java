@@ -1,5 +1,8 @@
 package com.work.view;
 
+import java.util.ArrayList;
+
+import com.work.model.dto.Qna;
 import com.work.model.service.BookService;
 import com.work.model.service.MemberService;
 import com.work.model.service.QnaService;
@@ -155,7 +158,6 @@ public class CustomerMenu {
 	}
 
 	private void purchaseList() {
-		String memberId = memberService.loginMemberId;
 	}
 
 	private void refundBook() {
@@ -229,14 +231,30 @@ public class CustomerMenu {
 	}
 
 	private void updateQna() {
+		System.out.print("수정할 Q&A 번호 입력: ");
+		int qnaNo = Utility.inputNumber();
+		
+		System.out.print("수정 Q&A 내용: ");
+		String qnaQuestion = Utility.inputString();
+		
+		qnaService.setMyQna(qnaNo, MemberService.loginMemberId, qnaQuestion);
+		costmerQnaMenu();
 		
 	}
 
 	private void myQnaList() {
-		
+		ArrayList<Qna> list = new ArrayList<Qna>(qnaService.getMyQna());
+		for (int index = 0; index < list.size(); index ++) {
+			System.out.println(list.get(index));
+		}
+		costmerQnaMenu();
 	}
 
 	private void deleteQna() {
+		System.out.print("삭제할 Q&A 번호 입력: ");
+		int qnaNo = Utility.inputNumber();
+		qnaService.removeMyQna(qnaNo, MemberService.loginMemberId);
+		costmerQnaMenu();
 		
 	}
 	

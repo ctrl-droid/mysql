@@ -1,8 +1,8 @@
 package com.work.model.service;
 
-import com.work.model.dao.MemberDao;
+import java.util.ArrayList;
+
 import com.work.model.dao.QnaDao;
-import com.work.model.dto.Member;
 import com.work.model.dto.Qna;
 import com.work.util.Utility;
 
@@ -56,10 +56,9 @@ public class QnaService {
 	 * @param memberId 아이디
 	 * @return 성공시 회원, 실패시 null
 	 */
-	public Qna getMyQna(String qnaWriter) {
-		return dao.selectOne(qnaWriter);
+	public ArrayList<Qna> getMyQna() {
+		return dao.selectOne(MemberService.loginMemberId);
 	}
-	
 	
 	/**
 	 * 나의 qna 변경
@@ -68,8 +67,30 @@ public class QnaService {
 	 * @param modifiMemberPw 변경할질문
 	 * @return 성공시 1, 실패시 0
 	 */
-	public int setMyQna(int qnaNo, String qnaWriter, String modifyQnaQuestion) {
-		return dao.updateQna(qnaNo, qnaWriter, modifyQnaQuestion);
+	public void setMyQna(int qnaNo, String qnaWriter, String qnaQuestion) {
+		int res = dao.updateQna(qnaNo, qnaWriter, qnaQuestion);
+		if (res == 0) {
+			System.out.println("[수정실패] 없는 Q&A 번호이거나 타인이 작성한 Q&A 입니다.");
+		} else {
+			System.out.println("Q&A 수정에 성공했습니다.");
+		}
+	}
+
+
+	/**
+	 * 나의 qna 삭제
+	 * @param qnaNo 
+	 * @param qnaWriter
+	 * @return 성공시 1, 실패시 0
+	 */
+	public void removeMyQna(int qnaNo, String qnaWriter) {
+		int res = dao.deleteQna(qnaNo, qnaWriter);
+		if (res == 0) {
+			System.out.println("[삭제실패] 없는 Q&A 번호이거나 타인이 작성한 Q&A 입니다.");
+		} else {
+			System.out.println(qnaNo + "번 Q&A 삭제에 성공했습니다.");
+		}
+		
 	}
 	
 	

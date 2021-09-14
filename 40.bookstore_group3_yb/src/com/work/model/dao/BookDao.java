@@ -35,7 +35,7 @@ public class BookDao {
 	 * @param dto 도서객체
 	 * @return 성공시 1, 실패시 0
 	 */
-	public int insertBook(Book dto) {
+	public int insertBook(String bookTitle, String bookWriter, String publisher, String genre, int price, int amount) {
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
@@ -49,14 +49,13 @@ public class BookDao {
 			
 			String sql = "INSERT INTO book VALUES(book_no.nextval, ?, ?, ?, ?, ?, ?)";
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, dto.getBookName());
-			stmt.setString(2, dto.getBookWriter());
-			stmt.setString(3, dto.getBookPublisher());
-			stmt.setString(4, dto.getGenre());
-			stmt.setInt(5, dto.getPirce());
-			stmt.setInt(6, dto.getAmount());
+			stmt.setString(1, bookTitle);
+			stmt.setString(2, bookWriter);
+			stmt.setString(3, publisher);
+			stmt.setString(4, genre);
+			stmt.setInt(5, price);
+			stmt.setInt(6, amount);
 
-			
 			return stmt.executeUpdate();
 				
 		} catch (SQLException e) {
@@ -177,6 +176,46 @@ public class BookDao {
 		return null;
 	}
 	
+	/**
+	 * 도서목록 내 도서번호 검색
+	 * @param bookNo 도서번호
+	 * @return 존재하면 true, 없으면 false
+	 */
+	public boolean existBookNo(int bookNo) {
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		Connection conn = null;
+		
+		PreparedStatement stmt = null;
+		
+		ResultSet rs = null;
+		
+		try {
+			conn = DriverManager.getConnection(url, user, password); 
+			String sql = "SELECT 1 FROM BOOK WHERE BOOK_NO = ?";
+			stmt = conn.prepareStatement(sql);	
+			stmt.setInt(1, bookNo);
+			
+			rs = stmt.executeQuery();	
+			return rs.next();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * 도서 수정
@@ -184,24 +223,31 @@ public class BookDao {
 	 * @param modifyAmount
 	 * @return 성공시 1, 실패시 0
 	 */
-	public int updateBook(int bookNo, int modifyAmount) {
+	public int updateBook(int bookNo, String bookTitle, String bookWriter, 
+			String publisher, String genre, int price, int amount) {
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
 		Connection conn = null;
+		
 		PreparedStatement stmt = null;
+
 		try {
 			conn = DriverManager.getConnection(url, user, password);
-			
-			String sql = "UPDATE book SET amonunt = ? WHERE book_no = ?";
+			String sql = "UPDATE BOOK SET book_title = ?, book_Writer = ?, publisher = ?, genre = ?, price = ?, amount = ? WHERE book_no = ?";
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, modifyAmount);
-			stmt.setInt(2, bookNo);
-
+			stmt.setString(1, bookTitle);
+			stmt.setString(2, bookWriter);
+			stmt.setString(3, publisher);
+			stmt.setString(4, genre);
+			stmt.setInt(5, price);
+			stmt.setInt(6, amount);
+			stmt.setInt(7, bookNo);
 			return stmt.executeUpdate();
-				
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -210,9 +256,8 @@ public class BookDao {
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			}	
 		}
-		
 		return 0;
 	}
 	
@@ -255,6 +300,9 @@ public class BookDao {
 		
 		return 0;
 	}
+
+
+	
 
 
 }
