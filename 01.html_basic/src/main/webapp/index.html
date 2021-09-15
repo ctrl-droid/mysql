@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- 웹검색시 언어선택, 웹접근성 -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>html basic</title>
+</head>
+<body>
+<a name="top"></a>
+
+<!--  로고이미지 -->
+<a href="index.html"><img src="img/logo.png" alt="로고이미지-웹접근성-이미지존재하지않는경우" title="이미지설명-풍선도움말"></a>
+
+<!-- 이동태그, 이동지점 지정, 이메일전송 -->
+<div>
+<a href="http://www.naver.com" target="_blank">네이버(새창에서이동열기)</a>
+<a href="login.html">로그인(현재창에서이동)</a>
+<hr>
+<a href="#top">맨위로</a>
+<a href="#list">목록으로</a>
+<a href="#bottom">맨아래로</a>
+
+</div>
+
+<!-- 제목태그 : h1 ~ h6 -->
+<h1>html basic tag</h1>
+우리의 소원은 퇴근
+<hr>
+
+우리의 <br>
+소원은 <p>
+퇴근 <br>
+</body>
+<hr>
+
+<pre>
+우리의
+   소원은
+       퇴근</pre>
+<hr>
+
+<em>우리의-이탤릭글자-강조-웹접근성</em> <strong>소원은-굵은글자-강조-웹접근성</strong>
+<i>퇴근-이탤릭</i><b>제발-굵은</b>
+<hr>
+
+<!-- 목록태그
+<ul> 순서없는 목록, <ol> 순서있는목록 => <li>목록
+<dl>데이터목록 => <dt>, <dd>
+-->
+<a name="list"></a>
+<ul>
+	<li>자바프로그래밍</li>
+	<li>JDBC</li>
+	<li>HTML</li>
+	<li>CSS</li>
+	<li>JAVASCRIPT</li>
+</ul>
+
+<ol>
+	<li>자바프로그래밍</li>
+	<li>JDBC</li>
+	<li>HTML</li>
+	<li>CSS</li>
+	<li>JAVASCRIPT</li>
+</ol>	
+
+<!-- type = disc|circle|square -->
+<ul type="circle">
+	<li>자바프로그래밍</li>
+	<li>JDBC</li>
+	<li>HTML</li>
+	<li>CSS</li>
+	<li>JAVASCRIPT</li>
+</ul>
+
+<!-- type = 1| A| a| I| i| start=시작인덱스, 1번부터 -->
+<ol type="a" start="6">
+	<li>자바프로그래밍</li>
+	<li>JDBC</li>
+	<li>HTML</li>
+	<li>CSS</li>
+	<li>JAVASCRIPT</li>
+</ol>
+<hr>
+
+<dl>
+	<dt>프로그래밍언어</dt>
+	<dd>파이썬</dd>
+	<dd>자바</dd>
+	<dt>프레임워크</dt>
+	<dd>Struts</dd>
+	<dd>MyBatis</dd>
+	<dd>Spring Boot</dd>
+	
+</dl>
+<a name="bottom"></a>
+
+<hr>
+맨아래입니다
+<a href="mailto:hodurotorl@gmail.com">관리자에게메일보내기</a>
+
+<div>
+<a href="#top">맨위로</a>
+<a href="#list">목록으로</a>
+<a href="#bottom">맨아래로</a>
+</div>
+
+</body>
+</html>
