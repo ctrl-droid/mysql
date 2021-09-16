@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+/* Filename: css/common.css */
+
+/* 로고 이미지 */
+#logo_img {
+width:30px;height:30px;
+}
+	
+/*링크 : 공통 밑줄제거, 글자크기 11px */
+a.common {
+	text-decoration: none;
+	font-size : 20px;
+	font-family: "Sofia", sans-serif;
+}
+	
+/* 링크 : 색상 */	
+a.color {
+	color: #00A170;
+}
+
+/* 링크 : 굵은글자 */
+a.bold {
+	font-weight: bold;
+}	
+
+
+/* color_1 */
+input[type=submit].color_1 {
+	background-color: blue;	
+	color : white;
+	border-radius: 5px 10px;
+}
+
+/* color_2 */
+input[type=reset].color_2 {
+	background-color: red;
+	color : white;
+}
+
+/* 버튼 size : submit, reset, button */
+input[type=submit],input[type=reset],input[type=button] {
+	width:80px;
+	height:30px;
+	border-radius: 3px;
+}
+
+
+/* table */
+table, tr, td, th {
+	border: dotted orange 1px;
+	margin: 5px;
+	padding: 5px;
+}
+
+td.btn_center {
+	text-align: center;
+}
+	
+/* form */
+input.small {
+	width: 70px;
+}
+
+input[readonly] {
+	background-color: #DCDCDC;
+}
+
+input:focus {
+	background-color: orange;
+}
