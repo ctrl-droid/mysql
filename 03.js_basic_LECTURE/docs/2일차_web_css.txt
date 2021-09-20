@@ -1,0 +1,116 @@
+## CSS
+-- 화면의 표현 담당
+-- 색상, 글꼴, 크기, 간격 등
+
+## 선언위치:
+-- <head>..</head>
+-- <body> <tag></tab> </body>
+
+## 종류
+-- 외부파일
+	>> 별도의 파일로 분리 설계: css/common.css
+	>> 표준화(일관성), 재사용
+	>> 권장
+	>> <link rel="stylesheet" href="css-url">
+	
+-- 내부파일
+	>> 해당 html 문서에만 적용
+	>> <style type="text/css">....</style>
+
+-- 내부파일 + 외부파일 import(공통/표준화)
+	>> 내부파일 + 외부파일 가져와서 일부분만 해당페이지에 맞게 변경 사용
+
+-- 특정 태그 
+	>> inline style
+	>> 권장하지 않음
+	>> 테스트 목적, css 충돌발생 우선순위에 따라서 inline 
+	
+
+## 기본형식:
+	선택자{
+		속성명: 속성값;
+		속성명: 속성값;
+	}
+	
+	선택자{속성명:속성값;속성명:속성값;}
+	
+	선택자{속성명: 속성값;}
+	선택자{속성명: 속성값;}
+
+	
+## CSS 관련 html 속성
+-- <tag id="unique-id">
+-- <tag class="grouping-name">
+-- inline css: <tag style="속성명:속성값;속성명:속성값;">
+
+
+## CSS 관련 html 태그
+-- <div></div> : block tag
+-- <span></span> : inline tag
+	
+## 주요 선택자(selector)
+
+-- 공통선택자: *
+
+-- 태그선택자: 태그명 <div>
+
+-- 클래스선택자: 
+	.클래스명 <div class="aa"> <p class="aa">
+	태그명.클래스명
+
+-- 아이디선택자: 
+	#아이디명 <div id="aa">
+	태그명#아이디명
+	
+-- 다중 태그 선택자: 태그명1, 태그명2
+	>> 컴마 구분자
+	
+-- 자식 태그 선택자: 태그명 > 자식태그명
+	>> ">" 구분자
+	
+-- 자손 태그 선택자: 자손태그명1 자손태그명2
+	>> 공백 구분자
+	
+-- 형제 태그 선택자: 형제태그명 + 형제태그명
+	>> "+" 구분자
+	
+-- 속성 선택자 : 
+	>> [속성명]
+	>> 태그명[속성명="속성값"]	=> "java"
+	>> 태그명^[속성명="속성시작값"] => "java%"
+	>> 태그명$[속성명="속성종료값"] => "%java"
+	>> 태그명*[속성명="속성포함값"] => "%java%"
+	
+-- 의사 선택자:
+	:link 	  	=> 링크 <a:link>
+	:active   	=> 클릭하는순간 <a:active>
+	:visited 	=> 방문 <a:visited>
+	:hover		=> 마우스가 왔을때: <a:hover>, <img:hover>
+	
+	:focus()	=> 포커스가 왔을때: <input:focus>
+	
+	:first-child	=> 첫번째자식
+	:last-child		=> 마지막자식
+	
+	
+## css 주요 속성
+-- display
+	>> block, inline, inline-block
+-- visibility
+	>> visible, hidden
+-- width
+-- height
+-- color
+-- font-weight
+-- font-size
+-- border
+-- border-radious
+-- margin
+-- padding
+-- text-decoration
+	>> none
+	>> underline
+-- list-style
+-- text-align
+	
+	

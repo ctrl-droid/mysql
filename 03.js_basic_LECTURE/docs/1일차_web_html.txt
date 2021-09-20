@@ -1,0 +1,281 @@
+## Web 관련 참고 사이트
+-- https://www.w3.org/
+-- https://www.w3schools.com/
+
+
+## Web Architecture
+
+
+
+## Web 개발환경 구축
+-- http://tomcat.apache.org
+-- Tomcat8.5.71
+-- 압축해제 설치폴더: C:\00.practice\apache-tomcat-8.5.71> 
+-- tomcat port번호 : 8080
+-- oracle XDB : 8080
+-- oracle http: 80
+
+-- dos> netstat -a
+-- dos> netstat -a > port_list.txt
+
+-- tomcat port번호 변경방법: 
+	>> apache-tomcat-8.5.71\conf> server.xml 
+	>> port="8080" => <Connector port="8090" ... >
+
+
+-- tomcat 폴더 구조
+>> apache-tomcat-8.5.71\bin> 실행파일(.exe, .bat, .sh)
+	=> 서버구동: startup.bat
+	=> 서버중지: shutdown.bat
+	=> 단일 프로세스 : 시스템에서 구동중이면 => 또 구동 시키지 못함
+	
+	
+>> apache-tomcat-8.5.71\conf> 환경설정파일(.xml, .ini, .properties)	
+	=> server.xml : 서버 운영관련 설정, port번호
+	=> web.xml
+	=> context.xml
+	
+	
+## tomcat 서버 요청 url
+-- http://127.0.0.1:8090/
+-- http://localhost:8090/	
+
+
+## Eclipse IDE: Enterprise Developer 
+-- Java Project
+-- JavaEE : Servlet 등 Web Project 
+-- 작업폴더: C:\00.practice\workspace_webui>
+-- 새로운 workspace 변경시 환경설정
+	>> 한글 인코딩: utf-8 (html5, ajax, 다국어지원)
+	>> Java: compiler, jre 
+	>> Server > Runtime environments > Tomcat8.5 
+
+-- 웹어플리케이션 실행방법 : 
+>> 실행 단축키: Ctrl + F11
+
+1. 프로젝트를 선택 
+	=> Run As => Run on server
+	=> web.xml 설정한 <welcome-file>
+	=> <welcome-file> 설정되어 있지않으면 web 기본 시작페이지: index.html 
+
+2. xxx.html 선택 
+	=> Run As => Run on server
+	=> 선택한 html 문서를 요청
+	
+	
+
+
+## Web Project 생성
+-- Dynamic web project
+
+
+## Web Application / Web Component 구성요소
+-- Java 기반
+-- 1. static 문서 : html, css, js, image 등
+	>> Eclipse 개발시 폴더 위치: project\src\main\webapp> 
+	>> 서브폴더 생성해서 static 문서 관리
+	
+-- 2. 환경설정(Deployment Descriptor) : web.xml
+	>> Eclipse 개발시 폴더 위치: project\src\main\webapp\WEB-INF> web.xml
+	
+-- 3. 라이브러리 : *.jar
+	>> Eclipse 개발시 폴더 위치: project\src\main\webapp\WEB-INF\lib> *.jar
+	
+-- 4. Java Class : *.java => *.class
+	>> Eclipse 개발시 폴더 위치(소스): project\src\main\java\package-폴더\...> *.java
+
+## ML(markup language)
+-- <태그명 속성명="속성값" 속성명='속성값'>body contents</태그명>
+
+-- <태그명 속성명="속성값" 속성명='속성값'></태그명>
+-- <태그명 속성명="속성값" 속성명='속성값'/>
+
+
+## HTML(hyper text markup language)
+-- 부가기능 문자 : 링크텍스트
+-- 사용자 정의 불가 태그
+-- www 표준화 (w3.org)
+
+## XML(eXtensible markup language)
+-- 사용자 확장 가능
+-- 표준화 되어 있지 않음 => 어플리케이션에서 사용하기 불편(불가)
+-- 예시) 
+<member-name>ㅁㅁㅁ</member-name>
+
+<member>
+	<name>ㅁㅁㅁ</name>
+</member>
+
+<MEMBER name="ㅁㅁㅁ">
+	<GRADE>ㅁ</GRADE>
+</MEMBER>
+
+## DTD(Document Type Definition)
+-- XML에 대한 문서의 표준화 
+-- 데이터 타입이 다양하지 못함 등
+
+## Schema
+-- XML에 대한 문서의 표준화 
+-- 데이터 타입도 다양함, DTD 가지고 있었던 불편사항들을 많은 부분 해결
+
+## Framework
+-- 환경설정: xml
+-- 환경설정 표준화: DTD, Schema
+
+## 태그
+-- element
+	>> body contents 유형: <시작태그명>body contents</종료태그명>
+	>> empty body 유형:
+		=> <시작태그명></종료태그명>
+		=> <시작태그명 /> : 권장
+	
+-- attribute
+	>> element에 대한 부가정보
+	>> 속성명="속성값"
+	>> 속성명='속성값'
+	>> 속성명=속성값 => html 대충 넘어감 (서블릿/jsp 문제발생) => 권장하지않음
+	>> 같은태그에 속성명 unique
+	
+-- body contents
+	>> child element(자식태그)
+	>> text(내용)
+	>> mixed = child element + text
+
+
+## 태그 구분
+1. 블럭태그(block tag)
+-- System.out.println("aaa"); => 출력 후 라인 이동
+-- <h1>, <p>, <div>
+
+2. 인라인태그(inline tag)
+-- System.out.print("aaa"); => 출력 후 라인 이동 없음
+-- <img>, <a>, <span>, <input>
+-- 명시적 라인이동 태그 : <br />, <br>
+
+
+## 서브폴더
+-- src/main/webapp/img> logo.png
+-- src/main/webapp/css>
+-- src/main/webapp/js>
+
+
+## 웹에서 서버에 데이터 전달방법
+1. form
+-- 사용자 입력: <input type="입력항목-text,password" name="입력항목변수명" [value="기본값"]>
+-- 사용자 선택:
+	=> <input type="radio" name="입력항목변수명" value="값지정"> : 단일 선택
+	=> <input type="checkbox" name="입력항목변수명" value="값지정"> : 다중 선택
+	
+	=> <select name="입력항목변수명" multiple="multiple" size="보여지는목록크기"> : 단일 선택 | 다중 선택 (multiple 속성 지정)
+		<option>값지정A</option>	=> 지정하지 않으면 맨위에 option 항목 기본 지정
+		<option value="전달값지정" selected>네이버</option>  => 선택 변경
+		<option>구글</option>
+	   </select>
+	
+-- 개발자 임의로 숨김데이터
+	=> <input type="hidden" name="입력항목변수명" value="값지정">
+
+2. url
+	=> 사용자 입력: http://url?key=value&key=value"
+	=> 개발자 지정: <a href="url?key=value&key=value">
+	=> 개발자 지정: <form action="url?key=value&key=value"">
+	
+3. javascript
+	=> var data = prompt(arg1, arg2);
+
+
+## 입력양식
+-- <input type="">
+	=> 단일텍스트 : text
+	=> **대체숨김텍스트 : password
+	=> 단일선택 : radio
+	=> 다중선택 : checkbox
+	=> 숨김데이터 : hidden
+	
+	=> 파일선택 : file
+	
+	=> 전송전용버튼 : submit
+	=> 취소전용버튼 : reset
+	
+	=> 버튼 : button
+	=> 사용자가 만든 이미지버튼 : image (css 설정 대체)
+
+-- <select></select>
+	=> 드롭다운형식
+	=> 단일 또는 다중 선택
+	
+-- <textarea></textarea>
+	=> 여러줄 입력양식
+	=> 자기소개, 도서설명 등
+
+## 입력양식 속성 : 
+-- html5 많은 부분이 추가
+-- html4에서는 자바스크립트로 개발자가 별도 구현 
+-- input type="추가"
+	=> date, time, week, month
+	=> number
+	=> tel
+	=> range
+	=> email
+	=> color
+	=> url
+	
+-- 추가속성
+	=> required : 필수 입력항목
+	=> autofocus
+	=> min
+	=> max
+	=> step
+	=> pattern
+	=> placeholder="도움말"
+
+-- readOnly : 읽기전용 => 사용자 변경불가
+-- disabled : 사용하지않음(서버전송시키지않음) => 사용자 변경불가, 사용자 보여주기위한 데이터
+
+## 회원관리시스템 화면 설계
+-- 시작페이지: index.html
+-- 로그인페이지 : login.html
+-- 회원가입페이지 : memberInput.html
+-- 아이디/비밀번호찾기페이지 : memberFind.html
+
+## 회원가입화면
+-- 사용자입력:
+	=> 1. 아이디
+	=> 2. 비밀번호
+	=> 2-2. 비밀번호 확인
+	=> 3. 이름
+	=> 4. 휴대폰
+	=> 5. 이메일
+	
+	=> 6. 가입일
+	=> 7. 등급
+	=> 8. 마일리지
+	=> 9. 담당자
+	
+	=> 10. 가입요청
+	=> 10. 취소
+
+
+## <form action="result.html" method="">
+-- method="전송요청방식"
+-- 기본: get 방식
+-- 요청방식:
+	>> get : 
+	=> 요청데이터 전송방식 : url?key=value&key=value
+	=> 보안 취약(사용자가 볼수있음), 길이제한 있음
+	=> 즐겨찾기, 검색 주로 사용
+	
+	>> post
+	=> 요청데이터 전송방식 : body 첨부 전송
+	=> 사용자가 볼수 없음, 길이제한 없음
+	=> 보안관련 데이터 전송 요청 사용: 회원가입, 로그인 등
+
+
+## 웹 이미지
+-- .jpg
+-- .gif
+-- .png
+
+
+
+
