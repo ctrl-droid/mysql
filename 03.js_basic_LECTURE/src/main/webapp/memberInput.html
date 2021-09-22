@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<!-- 외부 css 파일 : css/common.css -->
+<link rel="stylesheet" href="css/common.css" type="text/css">
+
+<!-- 내부 js 파일 -->
+<script type="text/javascript">
+	/* 비밀번호 보이기/감추기 체크박스 이벤트처리 */
+	function pwVisibleChecked(){
+		//alert('pwVisibleChecked() start');
+		
+		// 1. 이벤트소스: 체크박스 비밀번호 보이기 
+		var takeElement = document.getElementById("pwVisible");
+		
+		// 비밀번호, 비밀번호확인 객체 가져오기
+		var memberPwElement = document.getElementById("memberPw");
+		var memberPwConfirmElement = document.getElementById("memberPwConfirm");
+		
+		// 체크박스 비밀번호 보이기 : 체크 여부 
+		if (takeElement.checked) {
+			//alert('비밀번호 보이기 처리'); type="text"
+			memberPwElement.type = "text";
+			memberPwConfirmElement.type= "text";
+		} else {
+			//alert('비밀번호 감추기 처리'); type="password"
+			//memberPwElement.type = "password";
+			//memberPwConfirmElement.type= "password";
+			
+			// api 확인해서 메서드를 이용해서 변경 해보세요
+			// setAttribute("속성명", "속성값")
+			memberPwElement.setAttribute("type", "password");
+			memberPwConfirmElement.setAttribute("type", "password");
+		}
+	}
+
+	/* 비밀번호/비밀번호확인 데이터 동일여부 체크 이벤트 처리 */
+	function memberPwConfirmChecked() {
+		var memberPwElement = document.getElementById("memberPw");
+		var memberPwConfirmElement = document.getElementById("memberPwConfirm");
+		
+		var memberPw = memberPwElement.value;
+		var memberPwConfirm = memberPwConfirmElement.value;
+		
+		// 비밀번호확인 메세지출력 영역 객체 가져오기
+		var memberPwMessageElement = document.getElementById("memberPwMessage");
+		
+		if (memberPw.length == 0) {
+			//alert("비밀번호를 먼저 입력하시기 바랍니다.");
+			memberPwMessageElement.innerHTML = "<h3>비밀번호를 먼저 입력하시기 바랍니다.</h3>"; 
+			memberPwMessageElement.style.color = "red";
+			memberPwElement.focus();
+			return;
+		} 
+		
+		if(memberPwConfirm.length == 0) {
+			//alert("비밀번호확인을 먼저 입력하시기 바랍니다.");
+			memberPwMessageElement.innerText = "비밀번호확인을 먼저 입력하시기 바랍니다.";
+			memberPwMessageElement.style.color = "white";
+			memberPwMessageElement.style.backgroundColor = "red";
+			memberPwConfirmElement.focus();
+			return;
+		} 
+		
+		if(memberPw != memberPwConfirm) {
+			//alert("비밀번호와 비밀번호확인을 동일하게 입력하시기 바랍니다.");
+			memberPwMessageElement.setAttribute("class", "msg_error_color");
+			memberPwMessageElement.innerHTML = "비밀번호와 비밀번호확인을 동일하게 입력하시기 바랍니다."; 
+			memberPwElement.focus();
+			return;
+		}
+		
+		// 비밀번호와 비밀번호확인이 일치합니다.
+		// 전제조건 : css 파일에 선언되어 있어야함
+		memberPwMessageElement.className = "msg_success_color";
+		memberPwMessageElement.innerHTML = "비밀번호와 비밀번호확인이 일치합니다."; 
+		
+	}
+	
+	/* 이메일 도메인주소 자동 설정 직접입력 이벤트 처리 
+		=> 선택인경우 : none
+		=> 직접입력경우 : emailInput
+		=> 이메일도메인선택경우 : @naver.com
+	*/
+	function emailDomainChange(takeData) {
+		// 이메일아이디 객체가져오기
+		var emailIdElement = document.getElementById("emailId");
+		var emailId = emailIdElement.value;
+		
+		if (emailId.length == 0) {
+			alert("이메일 아이디를 먼저 입력하시기 바랍니다.");
+			emailIdElement.focus();
+			return;
+		}
+		
+		// 이메일도메인주소 객체가져오기
+		var emailDomainElement = document.getElementById("emailDomain");
+		
+		switch(takeData) {
+		case "none":
+			//alert('선택');
+			// 이메일도메인 value를 공백문자열 초기화 변경, 읽기 전용 설정 
+			emailDomainElement.value = "";
+			emailDomainElement.readOnly = "readonly";
+			break;
+		
+		case "emailInput":
+			//alert('직접입력');
+			// 이메일도메인 value를 공백문자열 초기화 변경, 읽기 전용 해제, 포커스를 이메일도메인입력항목 이동
+			emailDomainElement.value = "@";
+			emailDomainElement.readOnly = ""; // false
+			emailDomainElement.focus();
+			break;
+		
+		default:
+			//alert("도메인선택");
+			// 도메인선택 데이터로 이메일도메인 value를 변경, 읽기 전용 설정
+			emailDomainElement.value = takeData;
+			emailDomainElement.readOnly = "readonly";	// true
+			break;
+		}
+	}
+</script>
+</head>
+
+<body>
+<!-- 로고이미지 -->
+<div>
+<a href="index.html"><img id="logo_img" src="img/logo.png" alt="로고" title="Home"></a>
+</div>
+
+<!-- 기본 메뉴 링크 : 로그인 회원가입 아이디/비밀번호찾기 -->
+<div>
+<a href="login.html" class="common color">로그인</a>
+<a href="memberInput.html" class="common bold">회원가입</a>
+<a href="memberFind.html" class="common">아이디/비밀번호찾기</a>
+<a href="slide_image.html" class="common">슬라이드이미지</a>
+</div>
+
+<!-- 메인 컨텐츠 : 가입화면 -->
+<h3>회원가입</h3>
+<form action="result.html" method="post">
+<table>
+	<!-- 1. 아이디 -->
+	<tr>
+		<th><label>아이디</label></th>
+		<td><input type="text" name="memberId" autofocus="autofocus"></td>
+	</tr>
+	
+	<!-- 2. 비밀번호 -->
+	<tr>
+		<th><label>비밀번호</label></th>
+		<td>
+		<input type="password" name="memberPw" id="memberPw">
+		
+		<!-- 비밀번호보이기 checkbox 또는 이미지 -->
+		<span>
+		<label>비밀번호 보이기</label>
+		<input type="checkbox" name="pwVisible" id="pwVisible"
+			onclick="pwVisibleChecked()">
+		</span>
+		</td>
+	</tr>
+	
+	<!-- 2-2. 비밀번호 확인 -->
+	<tr>
+		<th><label>비밀번호 확인</label></th>
+		<td>
+		<input type="password" name="memberPwConfirm" id="memberPwConfirm">
+		<div id="memberPwMessage"></div>
+		</td>
+	</tr>
+	
+	<!-- 3. 이름 -->
+	<tr>
+		<th><label>이름</label></th>
+		<td><input type="text" name="name" id="name" 
+			onfocus="memberPwConfirmChecked()"></td>
+	</tr>
+	
+	<!-- 4. 휴대폰 : 형식(010-1234-1234), 010 고정 -->
+	<tr>
+		<th><label>휴대폰</label></th>
+		<td>
+		<input type="number" name="mobile1" value="010" readonly="readonly" class="small">
+		<input type="number" name="mobile2" class="small">
+		<input type="number" name="mobile3" class="small">
+		</td>
+	</tr>
+	
+	<!-- 5. 이메일 : 자바스크립트 이벤트 처리 예정 -->
+	<tr>
+		<th><label>이메일</label></th>
+		<td>
+		<input type="text" name="emailId" id="emailId" placeholder="이메일아이디입력"> 
+		
+		<input type="text" name="emailDomain" id="emailDomain" placeholder="이메일도메인선택" readonly="readonly">
+		<select name="emailDomainSelect" onchange="emailDomainChange(this.value)">
+			<option value="none">==선택==</option>
+			<option value="@naver.com">네이버</option>
+			<option value="@google.com">구글</option>
+			<option value="emailInput">직접입력</option>
+		</select>
+		</td>
+	</tr>
+	
+	<!-- 6. 가입일 : 날짜 기본형식 년도4자리-월2자리-일2자리 : 자바스크립트 이벤트 처리 -->
+	<tr>
+		<th><label>가입일</label></th>
+		<td><input type="date" name="entryDate" value="2021-09-16"></td>
+	</tr>
+	
+	<!-- 7. 등급 : G, S, A -->
+	<tr>
+		<th><label>등급</label></th>
+		<td>
+		<label>일반</label>
+		<input type="radio" name="grade" value="G" checked="checked">
+		
+		<label>우수</label>
+		<input type="radio" name="grade" value="S">
+		
+		<label>관리자</label>
+		<input type="radio" name="grade" value="A">
+		</td>
+	</tr>
+	
+	<!-- 8. 마일리지 : 숫자 -->
+	<tr>
+		<th><label>마일리지</label></th>
+		<td>
+		<input type="range" name="mileage" min="0" max="100000" step="100" value="0">
+		</td>
+	</tr>
+	
+	<!-- 9. 담당자 : 홍길동, 강감찬, 이순신, 김유신, 유관순, 신사임당 -->
+	<tr>
+		<th><label>담당자</label></th>
+		<td>
+		<select name="manager">
+			<option>==선택==</option>
+			<optgroup label="남자">
+				<option>홍길동</option>
+				<option>강감찬</option>
+				<option>이순신</option>
+				<option>김유신</option>
+			</optgroup>
+			
+			<optgroup label="여자">
+				<option>유관순</option>
+				<option>신사임당</option>
+			</optgroup>
+		</select>
+		</td>
+	</tr>
+	
+	<!-- 10. 가입요청 / 10. 취소-->
+	<tr>
+		<td colspan="2" class="btn_center">
+		<input type="submit" value="회원가입" class="color_1">
+		<input type="reset" value="취소" class="color_2">
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2">
+		<input type="button" value="회원가입-button">
+		<input type="button" value="취소-button">
+		</td>
+	</tr>	
+
+</table>
+</form>
+
+<!-- 사이트소개 -->
+<div>Copyright 2021. 홍길동 all rights reserved.</div>
+</body>
+</html>
