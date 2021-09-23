@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+/* Filename : css/common.css */
+
+/* 로고 이미지 */
+#logo_img {
+	width:30px;height:30px;
+}
+
+/* 링크 : 공통 밑줄제거, 글자크기 11px */
+a.common {
+	text-decoration: none;
+	font-size: 11px;
+}
+
+/* 링크 : 색상 */
+a.color {
+	color: #D2386C;
+}
+
+/* 링크 : 굵은글자 */
+a.bold {
+	font-weight: bold;
+}
+
+/* color_1 */
+input[type=submit].color_1 {
+	background-color: orange;
+	color: white;
+	border-radius: 0 20px;
+	border-color: red;
+}
+
+/* color_2 */
+input[type=reset].color_2 {
+	background-color: green;
+	color: white;
+}
+
+/* 버튼 크기 : submit, reset, button */
+input[type=submit], input[type=reset], input[type=button] {
+	width: 80px;
+	height: 30px;
+	border-radius: 3px;
+}
+
+/* table */
+table, tr, td, th {
+	border: solid orange 1px;
+	margin: 20px;
+	padding: 5px;
+}
+
+td.btn_center {
+	text-align: center;
+}
+
+/* form */
+input.small {
+	width: 80px;
+}
+
+input[readonly]{
+	background-color: gray;
+}
+
+input:focus {
+	background-color: orange;
+}
+
+/* 성공 메세지 색상 */
+.msg_success_color {
+	color: green;
+}
+
+/* 오류 메세지 색상 */
+.msg_error_color {
+	color: red;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
